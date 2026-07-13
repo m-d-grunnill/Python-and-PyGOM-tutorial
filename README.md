@@ -11,8 +11,8 @@ multidimensional arrays and matrices. Matplotlib provdes features for producing 
 
 ## Instructions
 
-This 2 part tutorial is given in 2 Jupyter Notebooks "Basics_of_Python.ipnyb" (Part 1) and "Python_and_PyGOM.ipnyb" (part 2). These is some bonus material
-on the use of Sympy in "R0 in Sympy and PyGOM".  Before using the notebook you will need to follow the installation instructions below.
+
+This 2 part tutorial was given on 9<sup>th</sup> and 16<sup>th</sup> January 2024. It irs given in 2 Jupyter Notebooks "Basics_of_Python.ipnyb" (Part 1) and "Python_and_PyGOM.ipnyb" (part 2). With only having one afternoon 16<sup>th</sup> July 2026 we may not get to "Python_and_PyGOM.ipnyb" (part 2). These is some bonus material on the use of Sympy in "R0 in Sympy and PyGOM".  Before using the notebook you will need to follow the installation instructions below.
 To use the notebook open Anaconda prompt use the command:
 * `conda activate pygom`
 * `cd *directory housing ""*` to navigate to the diretory housing "Python_and_PyGOM.ipnyb"
@@ -27,46 +27,29 @@ To update this repository in git bash:
 1. `cd *repository*` replace \*repository\* with the location of this repository.
 2. `git pull`
 
+
 ## Installation Instructions
 
-### 1. Installing Python and Desired packages
+### 1. Prerequisites: C++ Compiler
 
-1. Go to [Anaconda's installation manual](https://docs.anaconda.com/free/anaconda/install/index.html) and follow instructions for installing anaconda for your particular OS.
-2. Once installed navigate to your programs/apps to anaconda->Anaconda prompt. Open anaconda prompt (or terminal), if in you are running windows you may need to right click and select More->Run as Administrator.
-3. Within Anaconda prompt execute the commands:
-   1. `conda create --name pygom python==3.11.7` select y when prompted.
-   2. `conda activate pygom`
-   3. `pip install notebook dask matplotlib enum34 pandas python-dateutil numpy scipy sympy seaborn tqdm`
+PyGOM relies on Cython which uses C++ to speed up runtime. You will need a C++ compiler installed **before** creating the conda environment. This differs by OS:
 
-### 2. Installing PyGOM
-
-#### 2.1 Installing git.
-PyGOM's setup.py installation file need git to check which version it is. To install git download the installation file 
-from git's website below, open the installation file and follow instructions.
-* [https://git-scm.com/download](https://git-scm.com/download)
-
-#### 2.2 Installing A C++ compiler
-
-PyGOM relies on Cython which uses C++ to speed up runtime. You will need a C++ compiler. This is different for different OSs. 
-For Windows see section 2.2A, Mac see section 2.2B and for Linux 2.2C.
-
-#### 2.2A Installing Microsoft C++ Build Tools (Windows OS ONLY)
-PyGOM and a few other python packages require a C++ compiler. Unfortunately, Windows does not come with one. If you do not have a Windows machine skip the next section and go to section 2.2.
+#### Windows: Installing Microsoft C++ Build Tools
 1. Go to this link and download Microsoft C++ Build Tools: https://visualstudio.microsoft.com/visual-cpp-build-tools/.
 2. Download Microsoft C++ Build Tools:
 
 ![image info](./readme_images/Download%20Microsoft%20C++%20Build%20Tools.png)
-3. Once downloaded open vs_BuildTools.exe and navigate too “Available”:
+3. Once downloaded open vs_BuildTools.exe and navigate too "Available":
 
 ![image info](./readme_images/Available.png)
 4. Select installation of community edition:
 
 ![image info](./readme_images/community_edition.png)
 
-5. Select “Desktop development with C++”:
+5. Select "Desktop development with C++":
 
 ![image info](./readme_images/Desktop_development.png)
-6. Optional: To save on memory you can deselect everything but “MSVC v143 – VS 2022 C++ x64/x86 build tools (Latest)” and “Windows [your version of Windows] SDK”:
+6. Optional: To save on memory you can deselect everything but "MSVC v143 – VS 2022 C++ x64/x86 build tools (Latest)" and "Windows [your version of Windows] SDK":
 
 ![image info](./readme_images/memory_save.png)
 7. Then click install:
@@ -76,26 +59,36 @@ PyGOM and a few other python packages require a C++ compiler. Unfortunately, Win
 8. Once installed Visual Studio may start simply close it.
 9. Restart your computer.
 
-#### 2.2B Installing Xcode (MAC ONLY)
-Follow the instructions outlined one either:
+#### Mac: Installing Xcode
+Follow the instructions outlined in either:
 * [https://support.wolfram.com/12799?src=system-modeler](https://support.wolfram.com/12799?src=system-modeler)
 * The first 1 min and 48 seconds of [https://www.youtube.com/watch?v=ENy4MdoOxug](https://www.youtube.com/watch?v=ENy4MdoOxug)
 
-#### 2.2C Installing GCC (Linux ONLY)
+#### Linux: Installing GCC
 Follow Steps 1-2 from [https://www.cyberciti.biz/faq/howto-compile-and-run-c-cplusplus-code-in-linux/](https://www.cyberciti.biz/faq/howto-compile-and-run-c-cplusplus-code-in-linux/)
 
-#### 2.3	Installing PyGOM
-Unfortunately installing PyGOM via pip is not currently working. However, pygom can be downloaded and then installed locally.
+### 2. Creating the Conda Environment
 
-1. Open Anaconda prompt (or terminal), if in you are running windows you may need to right click and select More->Run as Administrator.
-2. Enter commands: 
-   1. `conda activate pygom`.
-   2. `cd *download location*` replace \*download location\* with the name of the folder you wish to download pygom to.
-   3. `git clone https://github.com/ukhsa-collaboration/pygom`
-   4. `cd pygom`
-   4. `python setup.py install`.
-3. Check pygom has been installed by entering the command `conda list` and looking for it in the output list of installed packages.
+Once you have a C++ compiler installed, create the conda environment using the provided `conda-env.yml` file. This will install Python, PyGOM, and all other required packages.
 
-
-
-
+1. Install [Anaconda](https://docs.anaconda.com/free/anaconda/install/index.html) or [Miniconda](https://docs.conda.io/en/latest/miniconda.html).
+2. Open Anaconda prompt (or terminal) and navigate to this repository:
+   ```
+   cd /path/to/Python-and-PyGOM-tutorial
+   ```
+3. Create the environment:
+   ```
+   conda env create -f conda-env.yml
+   ```
+   Or if you have mamba installed:
+   ```
+   mamba env create -f conda-env.yml
+   ```
+4. Activate the environment:
+   ```
+   conda activate pygom
+   ```
+5. Verify PyGOM is installed:
+   ```
+   python -c "import pygom; print(pygom.__version__)"
+   ```
