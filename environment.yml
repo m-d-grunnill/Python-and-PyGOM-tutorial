@@ -1,0 +1,11 @@
+name: python_tutorial
+channels:
+  - conda-forge
+dependencies:
+  - python==3.13.13
+  - jupyter
+  - numpy
+  - matplotlib
+  - pandas
+  - seaborn
+  - sympy
